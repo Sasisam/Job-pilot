@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JobPilot Pro — Job search &amp; auto-apply | Created by SASI</title>
+<meta name="description" content="JobPilot Pro — smart job search, resume matching and auto-apply dashboard for phone, tablet and desktop. Created by SASI.">
+<meta name="author" content="SASI">
+<meta name="application-name" content="JobPilot Pro">
+<meta name="theme-color" content="#0b0f1a" id="meta-theme">
+<meta name="color-scheme" content="dark light">
+<meta name="format-detection" content="telephone=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="JobPilot">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JobPilot Pro — Created by SASI">
+<meta property="og:description" content="Smart job search, resume matching and auto-apply. Works on phone, tablet and desktop.">
+<meta property="og:image" content="/static/icons/icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="/static/manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="/static/logo.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png">
+<script>
+try{var t=localStorage.getItem('jp-theme')||'dark';document.documentElement.dataset.theme=t;document.getElementById('meta-theme').content=t==='dark'?'#0b0f1a':'#f4f6fb'}catch(e){document.documentElement.dataset.theme='dark'}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/app.css?v=v11">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Auth gate -->
+<div id="auth-gate" class="auth-gate" hidden>
+  <div class="auth-card">
+    <div class="auth-brand">
+      <img src="/static/logo.svg" alt="JobPilot" width="48" height="48">
+      <div><strong>JobPilot</strong><em>PRO</em></div>
+    </div>
+    <p class="auth-sub" id="auth-sub">Sign in to your private job portal</p>
+    <div id="auth-error" class="auth-error" hidden></div>
+    <form id="auth-form" autocomplete="on">
+      <label>Username or email
+        <input id="auth-user" name="username" required autocomplete="username" placeholder="yourname">
+      </label>
+      <label>Password
+        <input id="auth-pass" name="password" type="password" required autocomplete="current-password" placeholder="••••••••">
+      </label>
+      <button type="submit" class="btn primary auth-btn" id="auth-submit">Log in</button>
+    </form>
+    <div class="auth-or"><span>or continue with</span></div>
+    <div class="auth-social">
+      <button type="button" class="btn ghost social" data-provider="google">Google</button>
+      <button type="button" class="btn ghost social" data-provider="github">GitHub</button>
+      <button type="button" class="btn ghost social" data-provider="apple">Apple</button>
+    </div>
+    <p class="auth-switch">
+      <span id="auth-switch-text">No account?</span>
+      <button type="button" class="link" id="auth-toggle">Create one</button>
+    </p>
+    <p class="auth-hint">First account becomes admin and can see team login stats.</p>
+  </div>
+</div>
+
+<div class="shell" id="app-shell" hidden>
+
+  <!-- Desktop sidebar (≥1024px) -->
+  <aside class="sidebar">
+    <a class="brand" href="#jobs" aria-label="JobPilot Pro by SASI">
+      <img class="logo" src="/static/logo.svg" alt="SASI logo" width="42" height="42">
+      <div>
+        <strong>JobPilot</strong>
+        <em>PRO</em>
+      </div>
+    </a>
+    <div class="ver-badge">Career search</div>
+    <nav id="nav" class="side-nav" aria-label="Main"></nav>
+    <div class="side-foot">
+      <div class="leds" id="leds"></div>
+      <button class="theme" id="theme" role="switch" aria-label="Toggle theme" aria-checked="true">
+        <span class="theme-track"><i class="knob"></i></span>
+        <span class="theme-label">Theme</span>
+      </button>
+      <div class="credit" title="JobPilot Pro">
+        <img src="/static/logo.svg" alt="" width="22" height="22">
+        <span>Created by <b>SASI</b></span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="workspace">
+    <!-- Phone / tablet app bar (<1024px) -->
+    <div class="appbar">
+      <a class="brand" href="#jobs" aria-label="JobPilot Pro by SASI">
+        <img class="logo" src="/static/logo.svg" alt="SASI logo" width="36" height="36">
+        <div>
+          <strong>JobPilot <em>PRO</em></strong>
+          <small>by SASI</small>
+        </div>
+      </a>
+      <div class="appbar-actions">
+        <button class="icon-btn" id="m-leds" title="AI, Email &amp; Alerts" aria-label="AI, Email and Alerts">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10.3 20a1.9 1.9 0 0 0 3.4 0"/></svg>
+        </button>
+        <button class="icon-btn" id="m-log" title="Activity log" aria-label="Activity log">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 6h14M5 12h14M5 18h9"/></svg>
+        </button>
+        <button class="icon-btn" id="m-theme" title="Toggle theme" aria-label="Toggle theme">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 id="page-title">Jobs</h1>
+        <p id="page-sub" class="page-sub">Search · match · auto-apply</p>
+      </div>
+      <div class="topbar-right">
+        <span class="live-pill" id="live-pill">Online</span>
+        <button class="icon-btn" id="log-btn" title="Activity log" aria-label="Activity log">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 6h14M5 12h14M5 18h9"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section id="auto" class="autopilot" hidden aria-live="polite"></section>
+    <main id="main">
+      <section id="v-jobs" class="view"></section>
+      <section id="v-resume" class="view" hidden></section>
+      <section id="v-portals" class="view" hidden></section>
+      <section id="v-settings" class="view" hidden></section>
+    </main>
+
+    <footer class="site-foot">
+      <img src="/static/logo.svg" alt="SASI logo" width="26" height="26">
+      <div>
+        <b>JobPilot Pro</b>
+        <span>Created by <strong>SASI</strong> · works on phone, tablet &amp; desktop</span>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- Phone / tablet bottom tab bar -->
+<nav id="tabbar" class="tabbar" aria-label="Main"></nav>
+
+<div id="dock" class="dock" hidden></div>
+<div id="scrim" class="scrim" hidden></div>
+<aside id="cfgpane" class="slidepane" hidden>
+  <div class="slidepane-h"><b id="cfg-title">Configure</b><button class="btn ghost" id="cfg-close">Close</button></div>
+  <div id="cfg-body" class="slidepane-body"></div>
+</aside>
+<aside id="logpane" class="slidepane" hidden>
+  <div class="slidepane-h"><b>Activity log</b><button class="btn ghost" id="log-close">Close</button></div>
+  <pre id="logtext"></pre>
+</aside>
+<div id="toast" class="toast" role="status"></div>
+<noscript><p style="padding:24px;font-family:sans-serif">JobPilot Pro needs JavaScript. — Created by SASI</p></noscript>
+<script src="/static/app.js?v=v11"></script>
+</body>
+</html>

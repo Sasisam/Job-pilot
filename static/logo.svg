@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SASI">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b6bff"/>
+      <stop offset="1" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#g)"/>
+  <path d="M43 20.5c-1.6-4.2-5.6-6.5-11-6.5-6.3 0-10.5 3.1-10.5 7.7 0 10.3 22 4.8 22 17 0 5.2-4.8 8.8-11.8 8.8-5.9 0-10.3-2.5-12-7" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M46 10.5l7 .1-.1 7" fill="none" stroke="#c4f1ff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M53 10.6L42.5 21" fill="none" stroke="#c4f1ff" stroke-width="3.2" stroke-linecap="round"/>
+</svg>
